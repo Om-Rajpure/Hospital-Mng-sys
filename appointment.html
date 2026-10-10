@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - City Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
+        <h2>🏥 City Hospital</h2>
+    </div>
+
+    <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li id="navRegister"><a href="register.html">Register</a></li>
+        <li id="navLogin"><a href="login.html">Login</a></li>
+        <li><a href="appointment.html" class="active">Appointment</a></li>
+        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Appointment Form -->
+<div class="appointment-box">
+
+    <h1>Book Appointment</h1>
+
+    <form id="appointmentForm">
+
+        <label for="patientName">Patient Name</label>
+        <input
+            type="text"
+            id="patientName"
+            placeholder="Enter Full Name"
+            required
+        >
+
+        <label for="patientEmail">Email</label>
+        <input
+            type="email"
+            id="patientEmail"
+            placeholder="Enter Email"
+            required
+        >
+
+        <label for="patientMobile">Mobile Number</label>
+        <input
+            type="tel"
+            id="patientMobile"
+            placeholder="Enter 10-digit Mobile Number"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            required
+        >
+
+        <label for="department">Select Department</label>
+        <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="General Medicine">General Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Gynecology">Gynecology</option>
+        </select>
+
+        <label for="doctor">Select Doctor</label>
+        <select id="doctor" required>
+            <option value="">Select Doctor</option>
+            <option value="Dr. Raj Sharma">Dr. Raj Sharma (Cardiology)</option>
+            <option value="Dr. Amit Patil">Dr. Amit Patil (Orthopedics)</option>
+            <option value="Dr. Imran Khan">Dr. Imran Khan (Neurology)</option>
+            <option value="Dr. Priya Mehta">Dr. Priya Mehta (Dermatology)</option>
+            <option value="Dr. Vivek Joshi">Dr. Vivek Joshi (Pediatrics)</option>
+            <option value="Dr. Sneha Kulkarni">Dr. Sneha Kulkarni (Gynecology)</option>
+        </select>
+
+        <label for="appointmentDate">Appointment Date</label>
+        <input
+            type="date"
+            id="appointmentDate"
+            required
+        >
+
+        <label for="appointmentTime">Appointment Time</label>
+        <input
+            type="time"
+            id="appointmentTime"
+            required
+        >
+
+        <label for="symptoms">Symptoms</label>
+        <textarea
+            id="symptoms"
+            rows="4"
+            placeholder="Describe your symptoms or reason for visit"
+        ></textarea>
+
+        <button type="submit" id="bookSubmitBtn">Confirm Appointment</button>
+
+    </form>
+
+    <!-- Result Message -->
+    <div id="result" role="status" aria-live="polite" style="margin-top: 15px; font-weight: bold; text-align: center;"></div>
+
+</div>
+
+<!-- Appointments History / List -->
+<div id="appointmentsSection" class="appointment-box" style="max-width: 800px; width: 90%; margin-top: 20px;">
+    <h2 style="text-align: center; color: #0d6efd; margin-bottom: 20px;">📋 Your Appointments</h2>
+    <div id="appointmentsList" style="overflow-x: auto;">
+        <p style="text-align: center; color: #666;">Loading appointments...</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <h3>🏥 City Hospital</h3>
+    <p>📍 Navi Mumbai, Maharashtra</p>
+    <p>📞 +91 9876543210</p>
+    <p>✉ cityhospital@gmail.com</p>
+    <p>© 2026 City Hospital. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

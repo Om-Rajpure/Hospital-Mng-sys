@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Appointment System - City Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
+        <h2>🏥 City Hospital</h2>
+    </div>
+
+    <ul id="navMenu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li id="navRegister"><a href="register.html">Register</a></li>
+        <li id="navLogin"><a href="login.html">Login</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Welcome to City Hospital</h1>
+    <p>Your Health, Our Priority</p>
+    <button onclick="window.location.href='appointment.html'">
+        Book Appointment
+    </button>
+</section>
+
+<!-- Services -->
+<section class="services">
+    <h1>Our Services</h1>
+
+    <div class="service-container">
+
+        <div class="service-card">
+            <h2>🩺 General Medicine</h2>
+            <p>Expert treatment for fever, cold and common diseases.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>❤️ Cardiology</h2>
+            <p>Heart specialist doctors with advanced treatment.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>🦷 Dental Care</h2>
+            <p>Complete dental check-up and treatment.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>🦴 Orthopedics</h2>
+            <p>Bone and joint treatment by experienced doctors.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-us">
+
+    <h1>Why Choose Us?</h1>
+
+    <div class="why-container">
+        <div class="why-card">✔ Experienced Doctors</div>
+        <div class="why-card">✔ 24×7 Emergency</div>
+        <div class="why-card">✔ Online Appointment</div>
+        <div class="why-card">✔ Modern Equipment</div>
+    </div>
+
+</section>
+
+<!-- About -->
+<section class="about">
+
+    <h1>About City Hospital</h1>
+
+    <p>
+        City Hospital provides quality healthcare with experienced doctors,
+        advanced technology and 24×7 emergency services.
+        We are committed to providing the best treatment for every patient.
+    </p>
+
+</section>
+
+<!-- Footer -->
+<footer>
+
+    <h3>🏥 City Hospital</h3>
+
+    <p>📍 Navi Mumbai, Maharashtra</p>
+
+    <p>📞 +91 9876543210</p>
+
+    <p>✉ cityhospital@gmail.com</p>
+
+    <p>© 2026 City Hospital. All Rights Reserved.</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

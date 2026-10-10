@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration - City Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
+        <h2>🏥 City Hospital</h2>
+    </div>
+    <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li id="navRegister"><a href="register.html" class="active">Register</a></li>
+        <li id="navLogin"><a href="login.html">Login</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="register-box">
+    <h1>Patient Registration</h1>
+
+    <form id="registerForm">
+
+        <label for="regFullName">Full Name</label>
+        <input type="text" id="regFullName" placeholder="Enter Full Name" required>
+
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="Enter Email" required>
+
+        <label for="regMobile">Mobile Number</label>
+        <input type="tel" id="regMobile" placeholder="Enter 10-digit Mobile Number" pattern="[0-9]{10}" maxlength="10" required>
+
+        <label for="regAge">Age</label>
+        <input type="number" id="regAge" placeholder="Enter Age" min="1" max="120" required>
+
+        <label for="regGender">Gender</label>
+        <select id="regGender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" placeholder="Enter Password (min 6 chars)" minlength="6" required>
+
+        <label for="regConfirmPassword">Confirm Password</label>
+        <input type="password" id="regConfirmPassword" placeholder="Confirm Password" minlength="6" required>
+
+        <button type="submit" id="regSubmitBtn">Register</button>
+
+    </form>
+
+    <div id="regResult" role="status" aria-live="polite" style="margin-top: 15px; font-weight: bold; text-align: center;"></div>
+    
+    <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #555;">
+        Already have an account? <a href="login.html" style="color: #0d6efd; font-weight: bold;">Login here</a>
+    </p>
+</div>
+
+<!-- Footer -->
+<footer>
+    <h3>🏥 City Hospital</h3>
+    <p>📍 Navi Mumbai, Maharashtra</p>
+    <p>📞 +91 9876543210</p>
+    <p>✉ cityhospital@gmail.com</p>
+    <p>© 2026 City Hospital. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

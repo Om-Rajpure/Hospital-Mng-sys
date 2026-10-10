@@ -1,0 +1,442 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+/* Navigation */
+
+nav{
+    background:#0d6efd;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+}
+
+nav ul li{
+    margin-left:20px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav ul li a:hover{
+    color:yellow;
+}
+
+/* Hero */
+
+.hero{
+    height:90vh;
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:55px;
+}
+
+.hero p{
+    font-size:24px;
+    margin:15px 0;
+}
+
+button{
+    padding:15px 30px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#084298;
+}
+
+/* Services */
+
+.services{
+    padding:60px;
+    background:#f4f4f4;
+    text-align:center;
+}
+
+.services h1{
+    margin-bottom:40px;
+}
+
+.service-container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.service-card{
+    background:white;
+    width:250px;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    transition:.3s;
+}
+
+.service-card:hover{
+    transform:translateY(-10px);
+}
+
+/* Why Choose Us */
+
+.why-us{
+    padding:60px;
+    text-align:center;
+}
+
+.why-container{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.why-card{
+    background:#0dcaf0;
+    color:white;
+    padding:25px;
+    width:220px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+/* About */
+
+.about{
+    padding:60px;
+    text-align:center;
+    background:white;
+}
+
+.about h1{
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+.about p{
+    width:70%;
+    margin:auto;
+    line-height:30px;
+    font-size:18px;
+    color:#555;
+}
+
+/* Footer */
+
+footer{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+footer p{
+    margin:10px 0;
+}
+/* Appointment */
+
+.appointment{
+    padding:60px;
+    background:#f4f4f4;
+    text-align:center;
+}
+
+.appointment h1{
+    color:#0d6efd;
+    margin-bottom:30px;
+}
+
+.appointment form{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.appointment input,
+.appointment select,
+.appointment textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px;
+}
+
+.appointment textarea{
+    height:100px;
+    resize:none;
+}
+
+.appointment button{
+    width:100%;
+}
+/* Register & Login */
+
+.register-box{
+    width:400px;
+    background:white;
+    margin:50px auto;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.register-box h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+.register-box label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.register-box input,
+.register-box select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.register-box button{
+    width:100%;
+    margin-top:20px;
+}
+/* ================= DOCTORS PAGE ================= */
+
+.doctors{
+    background:#f4f4f4;
+    padding:60px 20px;
+    text-align:center;
+}
+
+.doctors h1{
+    color:#0d6efd;
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.doctor-text{
+    color:#555;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+.doctor-container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+.doctor-card{
+    width:300px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.doctor-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+.doctor-card h2{
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+.doctor-card h3{
+    color:#444;
+    margin-bottom:15px;
+}
+
+.doctor-card p{
+    color:#666;
+    margin:8px 0;
+    line-height:1.6;
+}
+
+.doctor-card button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.doctor-card button:hover{
+    background:#084298;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:50px;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+footer p{
+    margin:5px 0;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+nav{
+    flex-direction:column;
+}
+
+nav ul{
+    flex-direction:column;
+    text-align:center;
+}
+
+nav ul li{
+    margin:10px 0;
+}
+
+.hero h1{
+    font-size:35px;
+}
+
+.doctor-card{
+    width:90%;
+}
+
+}
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:50px;
+    height:50px;
+    margin-right:10px;
+    border-radius:50%;
+}
+
+.logo h2{
+    color:white;
+    margin:0;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.logo h2{
+    color: white;
+    font-size: 28px;
+}
+/* Appointment Page */
+
+.appointment-box{
+    width:500px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.appointment-box h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+.appointment-box label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.appointment-box input,
+.appointment-box select,
+.appointment-box textarea{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px;
+}
+
+.appointment-box button{
+    width:100%;
+    margin-top:20px;
+}
+
+nav ul li a.active {
+    color: #ffeb3b;
+    text-decoration: underline;
+}
+
+@media(max-width:600px){
+    .appointment-box, .register-box {
+        width: 92%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+}

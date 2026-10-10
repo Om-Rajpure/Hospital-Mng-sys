@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors - City Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
+        <h2>🏥 City Hospital</h2>
+    </div>
+    <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="doctors.html" class="active">Doctors</a></li>
+        <li id="navRegister"><a href="register.html">Register</a></li>
+        <li id="navLogin"><a href="login.html">Login</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Doctors Section -->
+<section class="doctors">
+
+    <h1>👨‍⚕️ Our Specialist Doctors</h1>
+    <p class="doctor-text">
+        Meet our experienced and highly qualified doctors.
+    </p>
+
+    <div class="doctor-container">
+
+        <div class="doctor-card">
+            <h2>👨‍⚕️ Dr. Raj Sharma</h2>
+            <h3>Cardiologist</h3>
+            <p><b>Experience:</b> 15+ Years</p>
+            <p><b>Specialist:</b> Heart Diseases, ECG, BP Treatment</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Raj+Sharma&department=Cardiology'">
+                Book Appointment
+            </button>
+        </div>
+
+        <div class="doctor-card">
+            <h2>👨‍⚕️ Dr. Amit Patil</h2>
+            <h3>Orthopedic</h3>
+            <p><b>Experience:</b> 12+ Years</p>
+            <p><b>Specialist:</b> Bone Fracture, Joint Pain</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Amit+Patil&department=Orthopedics'">
+                Book Appointment
+            </button>
+        </div>
+
+        <div class="doctor-card">
+            <h2>👨‍⚕️ Dr. Imran Khan</h2>
+            <h3>Neurologist</h3>
+            <p><b>Experience:</b> 10+ Years</p>
+            <p><b>Specialist:</b> Brain & Nerve Disorders</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Imran+Khan&department=Neurology'">
+                Book Appointment
+            </button>
+        </div>
+
+        <div class="doctor-card">
+            <h2>👩‍⚕️ Dr. Priya Mehta</h2>
+            <h3>Dermatologist</h3>
+            <p><b>Experience:</b> 8+ Years</p>
+            <p><b>Specialist:</b> Skin, Hair & Allergy Treatment</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Priya+Mehta&department=Dermatology'">
+                Book Appointment
+            </button>
+        </div>
+
+        <div class="doctor-card">
+            <h2>👨‍⚕️ Dr. Vivek Joshi</h2>
+            <h3>Pediatrician</h3>
+            <p><b>Experience:</b> 9+ Years</p>
+            <p><b>Specialist:</b> Child Health & Vaccination</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Vivek+Joshi&department=Pediatrics'">
+                Book Appointment
+            </button>
+        </div>
+
+        <div class="doctor-card">
+            <h2>👩‍⚕️ Dr. Sneha Kulkarni</h2>
+            <h3>Gynecologist</h3>
+            <p><b>Experience:</b> 11+ Years</p>
+            <p><b>Specialist:</b> Women's Health & Pregnancy Care</p>
+            <button onclick="location.href='appointment.html?doctor=Dr.+Sneha+Kulkarni&department=Gynecology'">
+                Book Appointment
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <h3>🏥 City Hospital</h3>
+    <p>📍 Navi Mumbai, Maharashtra</p>
+    <p>📞 +91 9876543210</p>
+    <p>✉ cityhospital@gmail.com</p>
+    <p>© 2026 City Hospital. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
