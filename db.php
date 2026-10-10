@@ -1,5 +1,5 @@
 <?php
-// Database configuration - preserving original credentials
+// Database configuration - Preserved standard credentials for zero-config setups
 $host = getenv('DB_HOST') ?: "localhost";
 $user = getenv('DB_USER') ?: "root";
 $password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : "";
@@ -12,8 +12,18 @@ mysqli_report(MYSQLI_REPORT_OFF);
 // Attempt database connection
 $conn = @new mysqli($host, $user, $password, $database, $port);
 
+// If connection failed with localhost on Windows/Linux socket, try 127.0.0.1 TCP
+if ((!$conn || $conn->connect_error) && $host === "localhost") {
+    $altHost = "127.0.0.1";
+    $altConn = @new mysqli($altHost, $user, $password, $database, $port);
+    if ($altConn && !$altConn->connect_error) {
+        $conn = $altConn;
+        $host = $altHost;
+    }
+}
+
+// If database does not exist yet (Error 1049: Unknown database), automatically create it
 if ($conn && $conn->connect_errno === 1049) {
-    // Database does not exist yet; connect to MySQL server to create it
     $serverConn = @new mysqli($host, $user, $password, "", $port);
     if ($serverConn && !$serverConn->connect_error) {
         $escapedDb = $serverConn->real_escape_string($database);
@@ -30,7 +40,7 @@ if ($conn && !$conn->connect_error) {
 }
 
 /**
- * Initializes required database tables and initial seed data if they do not exist.
+ * Automatically initializes required tables and doctor records if they do not exist.
  */
 function init_db_schema($conn) {
     if (!$conn || $conn->connect_error) {
@@ -78,7 +88,7 @@ function init_db_schema($conn) {
     @$conn->query($doctorsTable);
     @$conn->query($appointmentsTable);
 
-    // Seed doctors if empty
+    // Seed initial doctors if table is empty
     $docCheck = @$conn->query("SELECT COUNT(*) as count FROM doctors");
     if ($docCheck && ($row = $docCheck->fetch_assoc()) && (int)$row['count'] === 0) {
         $seedSql = "INSERT INTO doctors (id, name, department, specialization, experience) VALUES
