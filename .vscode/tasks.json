@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Hospital System Server",
+            "type": "shell",
+            "command": "php -S 127.0.0.1:8000",
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Check Database Connection",
+            "type": "shell",
+            "command": "php test_db.php",
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
