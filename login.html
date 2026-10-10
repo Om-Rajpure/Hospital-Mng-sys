@@ -5,53 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Login - City Hospital</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav>
-    <div class="logo">
-        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
-        <h2>🏥 City Hospital</h2>
+<nav id="mainNav">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🏥</div>
+        <div class="logo-text">
+            <h2>City Hospital</h2>
+            <span>Healthcare & Wellness</span>
+        </div>
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links-container" id="navLinksContainer">
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li id="navRegister"><a href="register.html">Register</a></li>
+            <li id="navLogin"><a href="login.html" class="active">Login</a></li>
+            <li><a href="appointment.html">Appointment</a></li>
+            <li id="navUser" style="display:none;">
+                <span id="userNameBadge" style="color: var(--primary); font-weight: 700; margin-right: 8px; font-size: 14px;"></span>
+                <a href="#" id="logoutBtn" style="color: var(--accent); font-weight: 700;">Logout</a>
+            </li>
+        </ul>
+
+        <div class="nav-cta">
+            <a href="appointment.html" class="btn-nav btn-nav-primary">
+                <span>📅 Book Appointment</span>
+            </a>
+        </div>
     </div>
-    <ul id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li id="navRegister"><a href="register.html">Register</a></li>
-        <li id="navLogin"><a href="login.html" class="active">Login</a></li>
-        <li><a href="appointment.html">Appointment</a></li>
-        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
-    </ul>
 </nav>
 
-<div class="register-box">
+<div class="register-box reveal">
     <h1>Patient Login</h1>
 
     <form id="loginForm">
-
-        <label for="loginEmail">Email</label>
-        <input type="email" id="loginEmail" placeholder="Enter Email" required>
+        <label for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" placeholder="Enter Email Address" required>
 
         <label for="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="Enter Password" required>
 
-        <button type="submit" id="loginSubmitBtn">Login</button>
-
+        <button type="submit" id="loginSubmitBtn">Sign In</button>
     </form>
 
     <div id="loginResult" role="status" aria-live="polite" style="margin-top: 15px; font-weight: bold; text-align: center;"></div>
 
-    <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #555;">
-        Don't have an account? <a href="register.html" style="color: #0d6efd; font-weight: bold;">Register here</a>
+    <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--gray-600);">
+        Don't have an account? <a href="register.html" style="color: var(--primary); font-weight: 700;">Register here</a>
     </p>
 </div>
 
 <!-- Footer -->
 <footer>
-    <h3>🏥 City Hospital</h3>
-    <p>📍 Navi Mumbai, Maharashtra</p>
-    <p>📞 +91 9876543210</p>
-    <p>✉ cityhospital@gmail.com</p>
-    <p>© 2026 City Hospital. All Rights Reserved.</p>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <h3>🏥 City Hospital</h3>
+            <p>
+                Providing trusted, high-quality, and compassionate healthcare to our community. Committed to medical excellence and patient well-being.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-link" title="Facebook">f</a>
+                <a href="#" class="social-link" title="Twitter">𝕏</a>
+                <a href="#" class="social-link" title="Instagram">📸</a>
+                <a href="#" class="social-link" title="LinkedIn">in</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">→ Home</a></li>
+                <li><a href="doctors.html">→ Specialist Doctors</a></li>
+                <li><a href="appointment.html">→ Book Appointment</a></li>
+                <li><a href="register.html">→ Patient Registration</a></li>
+                <li><a href="login.html">→ Patient Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Departments</h4>
+            <ul class="footer-links">
+                <li><a href="appointment.html?department=Cardiology">→ Cardiology</a></li>
+                <li><a href="appointment.html?department=Neurology">→ Neurology</a></li>
+                <li><a href="appointment.html?department=Orthopedics">→ Orthopedics</a></li>
+                <li><a href="appointment.html?department=Pediatrics">→ Pediatrics</a></li>
+                <li><a href="appointment.html?department=Dermatology">→ Dermatology</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact & Hours</h4>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📍</span>
+                <span>Plot 42, Sector 15, Navi Mumbai, Maharashtra 400703</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📞</span>
+                <span>Emergency: +91 9876543210</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">✉</span>
+                <span>appointments@cityhospital.com</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 City Hospital. All Rights Reserved.</p>
+        <button class="back-to-top" id="backToTop" title="Scroll to top">↑</button>
+    </div>
 </footer>
 
 <script src="script.js"></script>

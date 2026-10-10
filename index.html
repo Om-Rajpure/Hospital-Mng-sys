@@ -3,106 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Appointment System - City Hospital</title>
+    <title>City Hospital - Compassionate Care, Advanced Medicine</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-    <div class="logo">
-        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
-        <h2>🏥 City Hospital</h2>
-    </div>
+<!-- Navigation Bar -->
+<nav id="mainNav">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🏥</div>
+        <div class="logo-text">
+            <h2>City Hospital</h2>
+            <span>Healthcare & Wellness</span>
+        </div>
+    </a>
 
-    <ul id="navMenu">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li id="navRegister"><a href="register.html">Register</a></li>
-        <li id="navLogin"><a href="login.html">Login</a></li>
-        <li><a href="appointment.html">Appointment</a></li>
-        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
-    </ul>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links-container" id="navLinksContainer">
+        <ul id="navMenu">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why-us">Why Us</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li id="navRegister"><a href="register.html">Register</a></li>
+            <li id="navLogin"><a href="login.html">Login</a></li>
+            <li id="navUser" style="display:none;">
+                <span id="userNameBadge" style="color: var(--primary); font-weight: 700; margin-right: 8px; font-size: 14px;"></span>
+                <a href="#" id="logoutBtn" style="color: var(--accent); font-weight: 700;">Logout</a>
+            </li>
+        </ul>
+
+        <div class="nav-cta">
+            <a href="appointment.html" class="btn-nav btn-nav-primary">
+                <span>📅 Book Appointment</span>
+            </a>
+        </div>
+    </div>
 </nav>
 
 <!-- Hero Section -->
 <section class="hero">
-    <h1>Welcome to City Hospital</h1>
-    <p>Your Health, Our Priority</p>
-    <button onclick="window.location.href='appointment.html'">
-        Book Appointment
-    </button>
+    <div class="hero-grid">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>24/7 Leading Healthcare & Emergency Provider</span>
+            </div>
+
+            <h1>Your Health, Our <span class="gradient-text">Top Priority</span> Every Day</h1>
+
+            <p>
+                Experience world-class healthcare with renowned specialists, state-of-the-art diagnostic technology, and immediate online appointment booking tailored to your convenience.
+            </p>
+
+            <div class="hero-actions">
+                <a href="appointment.html" class="btn-primary">
+                    <span>Book Appointment</span>
+                    <span>➜</span>
+                </a>
+                <a href="doctors.html" class="btn-secondary">
+                    <span>Meet Our Doctors</span>
+                    <span>👨‍⚕️</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-image-wrapper">
+                <div class="hero-card-main"></div>
+
+                <div class="floating-pill floating-pill-1">
+                    <div class="floating-icon heart">❤️</div>
+                    <div class="floating-text">
+                        <h4>24/7 Emergency</h4>
+                        <p>Immediate ambulance & ICU</p>
+                    </div>
+                </div>
+
+                <div class="floating-pill floating-pill-2">
+                    <div class="floating-icon doc">🩺</div>
+                    <div class="floating-text">
+                        <h4>Top Specialists</h4>
+                        <p>50+ Verified Doctors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- Services -->
-<section class="services">
-    <h1>Our Services</h1>
+<!-- Stats Bar -->
+<div class="stats-bar reveal">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number" data-target="50">50+</div>
+            <div class="stat-label">Specialist Doctors</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="25000">25,000+</div>
+            <div class="stat-label">Happy Patients</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="99">99.8%</div>
+            <div class="stat-label">Successful Treatments</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Emergency & Support</div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<section class="services" id="services">
+    <div class="section-header reveal">
+        <span class="section-tag">Clinical Excellence</span>
+        <h2 class="section-title">Comprehensive Medical Services</h2>
+        <p class="section-desc">
+            From routine checkups to specialized surgical procedures, our experienced medical staff provides patient-centered care.
+        </p>
+    </div>
 
     <div class="service-container">
-
-        <div class="service-card">
-            <h2>🩺 General Medicine</h2>
-            <p>Expert treatment for fever, cold and common diseases.</p>
+        <div class="service-card reveal">
+            <div class="service-icon">🩺</div>
+            <h3>General Medicine</h3>
+            <p>Comprehensive diagnosis, fever, viral infection treatments, preventive healthcare, and chronic condition management.</p>
+            <a href="appointment.html?department=General+Medicine" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
         </div>
 
-        <div class="service-card">
-            <h2>❤️ Cardiology</h2>
-            <p>Heart specialist doctors with advanced treatment.</p>
+        <div class="service-card reveal">
+            <div class="service-icon">❤️</div>
+            <h3>Cardiology</h3>
+            <p>Advanced cardiac care, ECG, 2D Echo, blood pressure management, and specialist heart condition therapies.</p>
+            <a href="appointment.html?department=Cardiology" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
         </div>
 
-        <div class="service-card">
-            <h2>🦷 Dental Care</h2>
-            <p>Complete dental check-up and treatment.</p>
+        <div class="service-card reveal">
+            <div class="service-icon">🦴</div>
+            <h3>Orthopedics</h3>
+            <p>Specialized joint replacement, fracture care, sports injury rehab, and spine treatments by leading orthopedic surgeons.</p>
+            <a href="appointment.html?department=Orthopedics" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
         </div>
 
-        <div class="service-card">
-            <h2>🦴 Orthopedics</h2>
-            <p>Bone and joint treatment by experienced doctors.</p>
+        <div class="service-card reveal">
+            <div class="service-icon">🧠</div>
+            <h3>Neurology</h3>
+            <p>Advanced diagnosis and treatments for neurological disorders, migraines, stroke rehabilitation, and spine health.</p>
+            <a href="appointment.html?department=Neurology" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
         </div>
 
+        <div class="service-card reveal">
+            <div class="service-icon">👶</div>
+            <h3>Pediatrics</h3>
+            <p>Compassionate care for infants, children, and teens with complete immunization and developmental monitoring.</p>
+            <a href="appointment.html?department=Pediatrics" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon">✨</div>
+            <h3>Dermatology</h3>
+            <p>Expert skin, hair, and cosmetic therapies, laser procedures, and allergy treatments for all ages.</p>
+            <a href="appointment.html?department=Dermatology" class="service-link">
+                <span>Book Consultation</span> <span>→</span>
+            </a>
+        </div>
     </div>
 </section>
 
 <!-- Why Choose Us -->
-<section class="why-us">
+<section class="why-us" id="why-us">
+    <div class="why-grid">
+        <div class="why-content reveal">
+            <span class="section-tag">Why Choose Us</span>
+            <h2>Setting the Standard for Modern Healthcare</h2>
+            <p>
+                City Hospital combines cutting-edge clinical infrastructure with empathetic medical professionals to deliver optimal patient outcomes.
+            </p>
 
-    <h1>Why Choose Us?</h1>
+            <div class="why-features">
+                <div class="feature-box">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h4>Expert Physicians</h4>
+                    <p>Board-certified doctors with decades of clinical excellence.</p>
+                </div>
 
-    <div class="why-container">
-        <div class="why-card">✔ Experienced Doctors</div>
-        <div class="why-card">✔ 24×7 Emergency</div>
-        <div class="why-card">✔ Online Appointment</div>
-        <div class="why-card">✔ Modern Equipment</div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Instant Booking</h4>
+                    <p>Effortless online appointment scheduling with instant confirmation.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🔬</div>
+                    <h4>Modern Diagnostics</h4>
+                    <p>Latest robotic equipment, MRI, CT scans, and 24/7 fully automated pathology lab.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🏥</div>
+                    <h4>24/7 Emergency</h4>
+                    <p>Round-the-clock trauma center, ICU beds, and emergency response teams.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="why-image-panel reveal">
+            <div class="why-image-overlay">
+                <h3>Certified Healthcare Facility</h3>
+                <p>Equipped with international-standard operation theaters and patient-first safety protocols.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Emergency CTA Banner -->
+<section class="emergency-banner reveal">
+    <div class="emergency-container">
+        <div class="emergency-text">
+            <h2>Need Immediate Emergency Assistance?</h2>
+            <p>Our trauma and ambulance teams are on standby 24 hours a day, 7 days a week.</p>
+        </div>
+        <div class="emergency-contact-group">
+            <a href="tel:+919876543210" class="btn-emergency">
+                <span>🚨 Call Ambulance: +91 9876543210</span>
+            </a>
+            <a href="appointment.html" class="btn-secondary" style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.4);">
+                <span>Book Normal Visit</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section" id="faq">
+    <div class="section-header reveal">
+        <span class="section-tag">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Find quick answers regarding our booking procedure, doctors, and hospital services.</p>
     </div>
 
+    <div class="faq-container">
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>How do I book an appointment online?</span>
+                <span class="faq-toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Simply navigate to our <a href="appointment.html" style="color: var(--primary); font-weight: bold;">Appointment Page</a>, fill in your details, select your preferred doctor and time slot, and submit. Your appointment is immediately saved in the system!</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>Can I choose a specific doctor and department?</span>
+                <span class="faq-toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Yes! You can browse our specialist doctors on the <a href="doctors.html" style="color: var(--primary); font-weight: bold;">Doctors Page</a> and click "Book Appointment" next to any doctor to automatically pre-select their name and department.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>Do I need to register before booking?</span>
+                <span class="faq-toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>While you can book directly, registering for an account allows your profile details to be auto-filled for future visits and gives you an organized dashboard of your appointment history.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>What should I bring on the day of my appointment?</span>
+                <span class="faq-toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Please bring a valid photo ID, your previous medical reports or prescription history if available, and arrive 10 minutes prior to your scheduled time slot.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- About -->
-<section class="about">
-
-    <h1>About City Hospital</h1>
-
-    <p>
-        City Hospital provides quality healthcare with experienced doctors,
-        advanced technology and 24×7 emergency services.
-        We are committed to providing the best treatment for every patient.
-    </p>
-
-</section>
-
-<!-- Footer -->
+<!-- Modern Multi-Column Footer -->
 <footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <h3>🏥 City Hospital</h3>
+            <p>
+                Providing trusted, high-quality, and compassionate healthcare to our community. Committed to medical excellence and patient well-being.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-link" title="Facebook">f</a>
+                <a href="#" class="social-link" title="Twitter">𝕏</a>
+                <a href="#" class="social-link" title="Instagram">📸</a>
+                <a href="#" class="social-link" title="LinkedIn">in</a>
+            </div>
+        </div>
 
-    <h3>🏥 City Hospital</h3>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">→ Home</a></li>
+                <li><a href="doctors.html">→ Specialist Doctors</a></li>
+                <li><a href="appointment.html">→ Book Appointment</a></li>
+                <li><a href="register.html">→ Patient Registration</a></li>
+                <li><a href="login.html">→ Patient Login</a></li>
+            </ul>
+        </div>
 
-    <p>📍 Navi Mumbai, Maharashtra</p>
+        <div class="footer-col">
+            <h4>Departments</h4>
+            <ul class="footer-links">
+                <li><a href="appointment.html?department=Cardiology">→ Cardiology</a></li>
+                <li><a href="appointment.html?department=Neurology">→ Neurology</a></li>
+                <li><a href="appointment.html?department=Orthopedics">→ Orthopedics</a></li>
+                <li><a href="appointment.html?department=Pediatrics">→ Pediatrics</a></li>
+                <li><a href="appointment.html?department=Dermatology">→ Dermatology</a></li>
+            </ul>
+        </div>
 
-    <p>📞 +91 9876543210</p>
+        <div class="footer-col">
+            <h4>Contact & Hours</h4>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📍</span>
+                <span>Plot 42, Sector 15, Navi Mumbai, Maharashtra 400703</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📞</span>
+                <span>Emergency: +91 9876543210</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">✉</span>
+                <span>appointments@cityhospital.com</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">🕒</span>
+                <span>OPD: 8:00 AM - 8:00 PM (Emergency 24/7)</span>
+            </div>
+        </div>
+    </div>
 
-    <p>✉ cityhospital@gmail.com</p>
-
-    <p>© 2026 City Hospital. All Rights Reserved.</p>
-
+    <div class="footer-bottom">
+        <p>© 2026 City Hospital. All Rights Reserved. Built with care for patients.</p>
+        <button class="back-to-top" id="backToTop" title="Scroll to top">↑</button>
+    </div>
 </footer>
 
 <script src="script.js"></script>

@@ -1,11 +1,167 @@
-// Hospital Appointment System - Frontend Integration Script
+// Hospital Appointment System - Interactive Frontend Script
 
 document.addEventListener("DOMContentLoaded", function () {
     initAuthNav();
+    initNavbarEffects();
+    initScrollAnimations();
+    initFaqAccordion();
+    initBackToTop();
+    initStatsCounter();
     initAppointmentPage();
     initRegisterPage();
     initLoginPage();
 });
+
+/**
+ * Handles sticky navbar styling and mobile navigation toggle
+ */
+function initNavbarEffects() {
+    const nav = document.getElementById("mainNav") || document.querySelector("nav");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navLinksContainer = document.getElementById("navLinksContainer");
+
+    // Scroll effect
+    window.addEventListener("scroll", function () {
+        if (!nav) return;
+        if (window.scrollY > 30) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    });
+
+    // Mobile menu toggle
+    if (mobileToggle && navLinksContainer) {
+        mobileToggle.addEventListener("click", function () {
+            navLinksContainer.classList.toggle("open");
+        });
+
+        // Close on link click
+        navLinksContainer.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinksContainer.classList.remove("open");
+            });
+        });
+    }
+}
+
+/**
+ * Scroll Reveal Animations via IntersectionObserver
+ */
+function initScrollAnimations() {
+    const revealElements = document.querySelectorAll(".reveal");
+    if (!revealElements.length) return;
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            function (entries, observerInstance) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        revealElements.forEach(function (el) {
+            observer.observe(el);
+        });
+    } else {
+        // Fallback for older browsers
+        revealElements.forEach(function (el) {
+            el.classList.add("active");
+        });
+    }
+}
+
+/**
+ * Interactive FAQ Accordion
+ */
+function initFaqAccordion() {
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach(function (item) {
+        const question = item.querySelector(".faq-question");
+        if (question) {
+            question.addEventListener("click", function () {
+                const isActive = item.classList.contains("active");
+                // Close other items
+                faqItems.forEach(function (otherItem) {
+                    otherItem.classList.remove("active");
+                });
+                if (!isActive) {
+                    item.classList.add("active");
+                }
+            });
+        }
+    });
+}
+
+/**
+ * Back to Top button
+ */
+function initBackToTop() {
+    const backBtn = document.getElementById("backToTop");
+    if (!backBtn) return;
+
+    backBtn.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
+/**
+ * Animated number counter for stats
+ */
+function initStatsCounter() {
+    const statNumbers = document.querySelectorAll(".stat-number[data-target]");
+    if (!statNumbers.length) return;
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            function (entries, observerInstance) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute("data-target"), 10);
+                        if (!isNaN(target)) {
+                            animateValue(entry.target, 0, target, 1500);
+                        }
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        statNumbers.forEach(function (num) {
+            observer.observe(num);
+        });
+    }
+}
+
+function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const isK = end >= 1000;
+    const step = function (timestamp) {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentVal = Math.floor(progress * (end - start) + start);
+        if (isK) {
+            obj.textContent = currentVal.toLocaleString() + "+";
+        } else if (end === 99) {
+            obj.textContent = (currentVal + 0.8) + "%";
+        } else {
+            obj.textContent = currentVal + "+";
+        }
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
 
 /**
  * Handles authentication state in navigation across all pages
@@ -209,37 +365,37 @@ async function loadAppointments() {
 
         if (response.ok && data.success && Array.isArray(data.appointments)) {
             if (data.appointments.length === 0) {
-                listContainer.innerHTML = `<p style="text-align: center; color: #777; padding: 15px;">No appointments found.</p>`;
+                listContainer.innerHTML = `<p style="text-align: center; color: #777; padding: 15px;">No appointments booked yet.</p>`;
                 return;
             }
 
             let html = `
                 <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;">
                     <thead>
-                        <tr style="background-color: #0d6efd; color: white; text-align: left;">
-                            <th style="padding: 10px; border: 1px solid #ddd;">#</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Patient</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Doctor</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Department</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Time</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                        <tr style="background: var(--primary); color: white; text-align: left;">
+                            <th style="padding: 12px; border: 1px solid #ddd;">#</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Patient</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Doctor</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Department</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Date</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Time</th>
+                            <th style="padding: 12px; border: 1px solid #ddd;">Status</th>
                         </tr>
                     </thead>
                     <tbody>
             `;
 
             data.appointments.forEach(function (apt, idx) {
-                const rowBg = idx % 2 === 0 ? "#ffffff" : "#f8f9fa";
+                const rowBg = idx % 2 === 0 ? "#ffffff" : "#f8fafc";
                 html += `
                     <tr style="background-color: ${rowBg};">
-                        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${apt.id}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(apt.patientName)}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(apt.doctor)}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(apt.department)}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(apt.date)}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(apt.time)}</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><span style="background-color: #d1e7dd; color: #0f5132; padding: 3px 8px; border-radius: 4px; font-weight: bold;">${escapeHtml(apt.status || 'Confirmed')}</span></td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold;">${apt.id}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;">${escapeHtml(apt.patientName)}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;">${escapeHtml(apt.doctor)}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;">${escapeHtml(apt.department)}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;">${escapeHtml(apt.date)}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;">${escapeHtml(apt.time)}</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0;"><span style="background-color: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 9999px; font-weight: 700; font-size: 12px;">${escapeHtml(apt.status || 'Confirmed')}</span></td>
                     </tr>
                 `;
             });

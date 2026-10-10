@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Doctors - City Hospital</title>
+    <title>Our Specialist Doctors - City Hospital</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Navigation -->
-<nav>
-    <div class="logo">
-        <img src="logo.png" alt="Hospital Logo" onerror="this.style.display='none'">
-        <h2>🏥 City Hospital</h2>
+<nav id="mainNav">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🏥</div>
+        <div class="logo-text">
+            <h2>City Hospital</h2>
+            <span>Healthcare & Wellness</span>
+        </div>
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links-container" id="navLinksContainer">
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doctors.html" class="active">Doctors</a></li>
+            <li id="navRegister"><a href="register.html">Register</a></li>
+            <li id="navLogin"><a href="login.html">Login</a></li>
+            <li><a href="appointment.html">Appointment</a></li>
+            <li id="navUser" style="display:none;">
+                <span id="userNameBadge" style="color: var(--primary); font-weight: 700; margin-right: 8px; font-size: 14px;"></span>
+                <a href="#" id="logoutBtn" style="color: var(--accent); font-weight: 700;">Logout</a>
+            </li>
+        </ul>
+
+        <div class="nav-cta">
+            <a href="appointment.html" class="btn-nav btn-nav-primary">
+                <span>📅 Book Appointment</span>
+            </a>
+        </div>
     </div>
-    <ul id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="doctors.html" class="active">Doctors</a></li>
-        <li id="navRegister"><a href="register.html">Register</a></li>
-        <li id="navLogin"><a href="login.html">Login</a></li>
-        <li><a href="appointment.html">Appointment</a></li>
-        <li id="navUser" style="display:none;"><span id="userNameBadge" style="color: #ffeb3b; font-weight: bold; margin-right: 10px;"></span><a href="#" id="logoutBtn" style="color:#ffc107;">Logout</a></li>
-    </ul>
 </nav>
 
 <!-- Doctors Section -->
 <section class="doctors">
-
-    <h1>👨‍⚕️ Our Specialist Doctors</h1>
-    <p class="doctor-text">
-        Meet our experienced and highly qualified doctors.
-    </p>
+    <div class="section-header reveal">
+        <span class="section-tag">Medical Staff</span>
+        <h1 class="section-title">Our Specialist Doctors</h1>
+        <p class="section-desc">
+            Meet our board-certified and highly qualified physicians, dedicated to providing compassionate, top-tier medical care.
+        </p>
+    </div>
 
     <div class="doctor-container">
-
-        <div class="doctor-card">
-            <h2>👨‍⚕️ Dr. Raj Sharma</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👨‍⚕️</div>
+            <h2>Dr. Raj Sharma</h2>
             <h3>Cardiologist</h3>
             <p><b>Experience:</b> 15+ Years</p>
             <p><b>Specialist:</b> Heart Diseases, ECG, BP Treatment</p>
@@ -44,8 +70,9 @@
             </button>
         </div>
 
-        <div class="doctor-card">
-            <h2>👨‍⚕️ Dr. Amit Patil</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👨‍⚕️</div>
+            <h2>Dr. Amit Patil</h2>
             <h3>Orthopedic</h3>
             <p><b>Experience:</b> 12+ Years</p>
             <p><b>Specialist:</b> Bone Fracture, Joint Pain</p>
@@ -54,8 +81,9 @@
             </button>
         </div>
 
-        <div class="doctor-card">
-            <h2>👨‍⚕️ Dr. Imran Khan</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👨‍⚕️</div>
+            <h2>Dr. Imran Khan</h2>
             <h3>Neurologist</h3>
             <p><b>Experience:</b> 10+ Years</p>
             <p><b>Specialist:</b> Brain & Nerve Disorders</p>
@@ -64,8 +92,9 @@
             </button>
         </div>
 
-        <div class="doctor-card">
-            <h2>👩‍⚕️ Dr. Priya Mehta</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👩‍⚕️</div>
+            <h2>Dr. Priya Mehta</h2>
             <h3>Dermatologist</h3>
             <p><b>Experience:</b> 8+ Years</p>
             <p><b>Specialist:</b> Skin, Hair & Allergy Treatment</p>
@@ -74,8 +103,9 @@
             </button>
         </div>
 
-        <div class="doctor-card">
-            <h2>👨‍⚕️ Dr. Vivek Joshi</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👨‍⚕️</div>
+            <h2>Dr. Vivek Joshi</h2>
             <h3>Pediatrician</h3>
             <p><b>Experience:</b> 9+ Years</p>
             <p><b>Specialist:</b> Child Health & Vaccination</p>
@@ -84,8 +114,9 @@
             </button>
         </div>
 
-        <div class="doctor-card">
-            <h2>👩‍⚕️ Dr. Sneha Kulkarni</h2>
+        <div class="doctor-card reveal">
+            <div class="doctor-avatar-circle">👩‍⚕️</div>
+            <h2>Dr. Sneha Kulkarni</h2>
             <h3>Gynecologist</h3>
             <p><b>Experience:</b> 11+ Years</p>
             <p><b>Specialist:</b> Women's Health & Pregnancy Care</p>
@@ -93,18 +124,68 @@
                 Book Appointment
             </button>
         </div>
-
     </div>
-
 </section>
 
 <!-- Footer -->
 <footer>
-    <h3>🏥 City Hospital</h3>
-    <p>📍 Navi Mumbai, Maharashtra</p>
-    <p>📞 +91 9876543210</p>
-    <p>✉ cityhospital@gmail.com</p>
-    <p>© 2026 City Hospital. All Rights Reserved.</p>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <h3>🏥 City Hospital</h3>
+            <p>
+                Providing trusted, high-quality, and compassionate healthcare to our community. Committed to medical excellence and patient well-being.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-link" title="Facebook">f</a>
+                <a href="#" class="social-link" title="Twitter">𝕏</a>
+                <a href="#" class="social-link" title="Instagram">📸</a>
+                <a href="#" class="social-link" title="LinkedIn">in</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">→ Home</a></li>
+                <li><a href="doctors.html">→ Specialist Doctors</a></li>
+                <li><a href="appointment.html">→ Book Appointment</a></li>
+                <li><a href="register.html">→ Patient Registration</a></li>
+                <li><a href="login.html">→ Patient Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Departments</h4>
+            <ul class="footer-links">
+                <li><a href="appointment.html?department=Cardiology">→ Cardiology</a></li>
+                <li><a href="appointment.html?department=Neurology">→ Neurology</a></li>
+                <li><a href="appointment.html?department=Orthopedics">→ Orthopedics</a></li>
+                <li><a href="appointment.html?department=Pediatrics">→ Pediatrics</a></li>
+                <li><a href="appointment.html?department=Dermatology">→ Dermatology</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact & Hours</h4>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📍</span>
+                <span>Plot 42, Sector 15, Navi Mumbai, Maharashtra 400703</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">📞</span>
+                <span>Emergency: +91 9876543210</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="footer-contact-icon">✉</span>
+                <span>appointments@cityhospital.com</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 City Hospital. All Rights Reserved.</p>
+        <button class="back-to-top" id="backToTop" title="Scroll to top">↑</button>
+    </div>
 </footer>
 
 <script src="script.js"></script>
