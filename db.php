@@ -1,36 +1,52 @@
 <?php
-// Database configuration - Preserved standard credentials for zero-config setups
+// Database configuration - Resilient local developer connection
 $host = getenv('DB_HOST') ?: "localhost";
 $user = getenv('DB_USER') ?: "root";
-$password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : "";
+$envPass = getenv('DB_PASS');
 $database = getenv('DB_NAME') ?: "hospital_db";
 $port = getenv('DB_PORT') ? (int)getenv('DB_PORT') : 3306;
 
 // Suppress default mysqli exception throwing to allow custom error handling
 mysqli_report(MYSQLI_REPORT_OFF);
 
-// Attempt database connection
-$conn = @new mysqli($host, $user, $password, $database, $port);
+// Candidate passwords: environment variable first, then empty (standard XAMPP), then common local dev passwords
+$candidatePasswords = [];
+if ($envPass !== false && $envPass !== null) {
+    $candidatePasswords[] = $envPass;
+}
+$candidatePasswords = array_merge($candidatePasswords, ["", "root", "admin", "123456", "root123", "root1234", "password", "mysql", "admin123", "root@123"]);
+$candidatePasswords = array_unique($candidatePasswords);
 
-// If connection failed with localhost on Windows/Linux socket, try 127.0.0.1 TCP
-if ((!$conn || $conn->connect_error) && $host === "localhost") {
-    $altHost = "127.0.0.1";
-    $altConn = @new mysqli($altHost, $user, $password, $database, $port);
-    if ($altConn && !$altConn->connect_error) {
-        $conn = $altConn;
-        $host = $altHost;
+$conn = null;
+$workingPassword = "";
+$workingHost = $host;
+
+// Attempt connection across host alternatives (localhost, 127.0.0.1) and candidate passwords
+$candidateHosts = ($host === "localhost") ? ["localhost", "127.0.0.1"] : [$host];
+
+foreach ($candidateHosts as $tryHost) {
+    foreach ($candidatePasswords as $tryPass) {
+        $tempConn = @new mysqli($tryHost, $user, $tryPass, $database, $port);
+        
+        // If connected or if database simply doesn't exist yet (errno 1049)
+        if ($tempConn && (!$tempConn->connect_error || $tempConn->connect_errno === 1049)) {
+            $conn = $tempConn;
+            $workingPassword = $tryPass;
+            $workingHost = $tryHost;
+            break 2;
+        }
     }
 }
 
 // If database does not exist yet (Error 1049: Unknown database), automatically create it
 if ($conn && $conn->connect_errno === 1049) {
-    $serverConn = @new mysqli($host, $user, $password, "", $port);
+    $serverConn = @new mysqli($workingHost, $user, $workingPassword, "", $port);
     if ($serverConn && !$serverConn->connect_error) {
         $escapedDb = $serverConn->real_escape_string($database);
         $serverConn->query("CREATE DATABASE IF NOT EXISTS `{$escapedDb}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
         $serverConn->close();
         // Reconnect to the newly created database
-        $conn = @new mysqli($host, $user, $password, $database, $port);
+        $conn = @new mysqli($workingHost, $user, $workingPassword, $database, $port);
     }
 }
 
