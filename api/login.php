@@ -35,39 +35,46 @@ if (!$input || !is_array($input)) {
     $input = $_POST;
 }
 
-$email = trim($input['email'] ?? '');
+// Support identifier as either username or email
+$identifier = trim($input['identifier'] ?? $input['email'] ?? $input['username'] ?? '');
 $password = $input['password'] ?? '';
 
-if (empty($email) || empty($password)) {
+if (empty($identifier) || empty($password)) {
     http_response_code(400);
-    echo json_encode(["success" => false, "message" => "Please provide both email and password."]);
+    echo json_encode(["success" => false, "message" => "Please provide both username/email and password."]);
     exit;
 }
 
-$stmt = $conn->prepare("SELECT id, full_name, email, mobile, age, gender, password FROM users WHERE email = ? LIMIT 1");
+// Find user by either email or username
+$stmt = $conn->prepare("SELECT id, username, full_name, email, mobile, age, gender, role, password FROM users WHERE email = ? OR username = ? LIMIT 1");
 if (!$stmt) {
     http_response_code(500);
     echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
     exit;
 }
 
-$stmt->bind_param("s", $email);
+$stmt->bind_param("ss", $identifier, $identifier);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result && ($user = $result->fetch_assoc())) {
     if (password_verify($password, $user['password'])) {
+        $userRole = !empty($user['role']) ? $user['role'] : 'patient';
+        
         $_SESSION['user_id'] = (int)$user['id'];
         $_SESSION['user_name'] = $user['full_name'];
         $_SESSION['user_email'] = $user['email'];
+        $_SESSION['user_role'] = $userRole;
 
         $userData = [
             "id" => (int)$user['id'],
+            "username" => $user['username'] ?? '',
             "fullName" => $user['full_name'],
             "email" => $user['email'],
             "mobile" => $user['mobile'],
             "age" => (int)$user['age'],
-            "gender" => $user['gender']
+            "gender" => $user['gender'],
+            "role" => $userRole
         ];
 
         $stmt->close();
@@ -86,5 +93,5 @@ if ($stmt) {
 }
 
 http_response_code(401);
-echo json_encode(["success" => false, "message" => "Invalid email or password."]);
+echo json_encode(["success" => false, "message" => "Invalid credentials. Please verify username/email and password."]);
 ?>

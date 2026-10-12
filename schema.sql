@@ -5,11 +5,13 @@ USE hospital_db;
 -- Patients / Users Table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NULL UNIQUE,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     mobile VARCHAR(15) NOT NULL,
     age INT NOT NULL,
     gender VARCHAR(10) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'patient',
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,7 +41,8 @@ CREATE TABLE IF NOT EXISTS appointments (
     status VARCHAR(50) DEFAULT 'Confirmed',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX (email),
-    INDEX (appointment_date)
+    INDEX (appointment_date),
+    INDEX (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Seed Specialist Doctors

@@ -30,6 +30,7 @@
         <ul id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="doctors.html">Doctors</a></li>
+            <li id="navAdminItem" style="display:none;"><a href="admin.html" id="navAdmin" class="nav-admin-btn">🛡️ Admin</a></li>
             <li id="navRegister"><a href="register.html">Register</a></li>
             <li id="navLogin"><a href="login.html" class="active">Login</a></li>
             <li><a href="appointment.html">Appointment</a></li>
@@ -51,8 +52,8 @@
     <h1>Patient Login</h1>
 
     <form id="loginForm">
-        <label for="loginEmail">Email Address</label>
-        <input type="email" id="loginEmail" placeholder="Enter Email Address" required>
+        <label for="loginEmail">Username or Email</label>
+        <input type="text" id="loginEmail" placeholder="Enter Username (e.g. admin) or Email" required>
 
         <label for="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="Enter Password" required>

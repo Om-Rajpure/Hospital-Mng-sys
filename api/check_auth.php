@@ -17,9 +17,10 @@ if (!empty($_SESSION['user_id'])) {
     echo json_encode([
         "authenticated" => true,
         "user" => [
-            "id" => $_SESSION['user_id'],
+            "id" => (int)$_SESSION['user_id'],
             "name" => $_SESSION['user_name'] ?? '',
-            "email" => $_SESSION['user_email'] ?? ''
+            "email" => $_SESSION['user_email'] ?? '',
+            "role" => $_SESSION['user_role'] ?? 'patient'
         ]
     ]);
 } else {

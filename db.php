@@ -56,7 +56,7 @@ if ($conn && !$conn->connect_error) {
 }
 
 /**
- * Automatically initializes required tables and doctor records if they do not exist.
+ * Automatically initializes required tables, schema migrations, and seed records if they do not exist.
  */
 function init_db_schema($conn) {
     if (!$conn || $conn->connect_error) {
@@ -65,11 +65,13 @@ function init_db_schema($conn) {
 
     $usersTable = "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NULL UNIQUE,
         full_name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         mobile VARCHAR(15) NOT NULL,
         age INT NOT NULL,
         gender VARCHAR(10) NOT NULL,
+        role VARCHAR(20) NOT NULL DEFAULT 'patient',
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
@@ -97,12 +99,24 @@ function init_db_schema($conn) {
         status VARCHAR(50) DEFAULT 'Confirmed',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         INDEX (email),
-        INDEX (appointment_date)
+        INDEX (appointment_date),
+        INDEX (status)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
     @$conn->query($usersTable);
     @$conn->query($doctorsTable);
     @$conn->query($appointmentsTable);
+
+    // Schema migration check: ensure 'role' and 'username' columns exist in users
+    $roleCheck = @$conn->query("SHOW COLUMNS FROM users LIKE 'role'");
+    if ($roleCheck && $roleCheck->num_rows === 0) {
+        @$conn->query("ALTER TABLE users ADD COLUMN role VARCHAR(20) NOT NULL DEFAULT 'patient' AFTER gender");
+    }
+
+    $usernameCheck = @$conn->query("SHOW COLUMNS FROM users LIKE 'username'");
+    if ($usernameCheck && $usernameCheck->num_rows === 0) {
+        @$conn->query("ALTER TABLE users ADD COLUMN username VARCHAR(50) NULL UNIQUE AFTER id");
+    }
 
     // Seed initial doctors if table is empty
     $docCheck = @$conn->query("SELECT COUNT(*) as count FROM doctors");
@@ -115,6 +129,35 @@ function init_db_schema($conn) {
         (5, 'Dr. Vivek Joshi', 'Pediatrics', 'Child Health & Vaccination', '9+ Years'),
         (6, 'Dr. Sneha Kulkarni', 'Gynecology', 'Women\'s Health & Pregnancy Care', '11+ Years')";
         @$conn->query($seedSql);
+    }
+
+    // Seed local development administrator account idempotently
+    seed_admin_account($conn);
+}
+
+/**
+ * Ensures the development administrator account exists idempotently.
+ */
+function seed_admin_account($conn) {
+    if (!$conn || $conn->connect_error) {
+        return;
+    }
+
+    $adminQuery = @$conn->query("SELECT id, role, password FROM users WHERE username = 'admin' OR email = 'admin@hospital.com' LIMIT 1");
+    if ($adminQuery && $adminQuery->num_rows === 0) {
+        $adminPassHash = password_hash('admin@123', PASSWORD_BCRYPT);
+        $stmt = $conn->prepare("INSERT INTO users (username, full_name, email, mobile, age, gender, role, password) VALUES ('admin', 'System Administrator', 'admin@hospital.com', '9999999999', 35, 'Other', 'admin', ?)");
+        if ($stmt) {
+            $stmt->bind_param("s", $adminPassHash);
+            $stmt->execute();
+            $stmt->close();
+        }
+    } else if ($adminQuery && ($adminRow = $adminQuery->fetch_assoc())) {
+        // Ensure the account has the admin role
+        if ($adminRow['role'] !== 'admin') {
+            $adminId = (int)$adminRow['id'];
+            @$conn->query("UPDATE users SET role = 'admin' WHERE id = {$adminId}");
+        }
     }
 }
 ?>

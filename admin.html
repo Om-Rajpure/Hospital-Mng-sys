@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - City Hospital Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: #f1f5f9;">
+
+<!-- Navigation -->
+<nav id="mainNav">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🏥</div>
+        <div class="logo-text">
+            <h2>City Hospital</h2>
+            <span>Admin Control Center</span>
+        </div>
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links-container" id="navLinksContainer">
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="appointment.html">Book Appointment</a></li>
+            <li><a href="admin.html" class="active nav-admin-btn">🛡️ Admin Panel</a></li>
+            <li id="navUser">
+                <span id="userNameBadge" style="color: var(--primary); font-weight: 700; margin-right: 8px; font-size: 14px;">👤 Admin</span>
+                <a href="#" id="logoutBtn" style="color: var(--accent); font-weight: 700;">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Admin Dashboard Main Wrapper -->
+<div class="admin-page-wrapper">
+
+    <!-- Header Banner Card -->
+    <div class="admin-header-card">
+        <div class="admin-header-left">
+            <h1>
+                <span>🏥 Executive Administration</span>
+                <span class="admin-badge">Live System</span>
+            </h1>
+            <p>Real-time clinical operations, appointments orchestration, medical staff and patient database management.</p>
+        </div>
+        <div class="admin-header-actions">
+            <button class="btn-primary" id="btnRefreshStats" style="padding: 10px 20px; font-size: 14px;">
+                <span>🔄 Refresh Data</span>
+            </button>
+            <a href="index.html" class="btn-secondary" style="padding: 10px 18px; font-size: 14px; background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">
+                <span>🌐 Public Site</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tab-nav">
+        <button class="admin-tab-btn active" data-tab="tabOverview">
+            <span>📊 System Overview</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabAppointments">
+            <span>📅 Appointments Manager</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabDoctors">
+            <span>👨‍⚕️ Doctors Directory</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabPatients">
+            <span>👥 Patients Registry</span>
+        </button>
+    </div>
+
+    <!-- ================= TAB 1: OVERVIEW ================= -->
+    <div class="admin-tab-pane active" id="tabOverview">
+
+        <!-- KPI Metrics Grid -->
+        <div class="admin-kpi-grid">
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-blue">👥</div>
+                <div class="kpi-info">
+                    <h3 id="statTotalPatients">0</h3>
+                    <p>Total Patients</p>
+                </div>
+            </div>
+
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-emerald">👨‍⚕️</div>
+                <div class="kpi-info">
+                    <h3 id="statTotalDoctors">0</h3>
+                    <p>Specialist Doctors</p>
+                </div>
+            </div>
+
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-purple">📋</div>
+                <div class="kpi-info">
+                    <h3 id="statTotalAppointments">0</h3>
+                    <p>Total Appointments</p>
+                </div>
+            </div>
+
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-amber">⏳</div>
+                <div class="kpi-info">
+                    <h3 id="statPendingAppointments">0</h3>
+                    <p>Pending Review</p>
+                </div>
+            </div>
+
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-emerald">✅</div>
+                <div class="kpi-info">
+                    <h3 id="statConfirmedAppointments">0</h3>
+                    <p>Confirmed Visits</p>
+                </div>
+            </div>
+
+            <div class="admin-kpi-card">
+                <div class="kpi-icon-box kpi-icon-blue">🎯</div>
+                <div class="kpi-info">
+                    <h3 id="statCompletedAppointments">0</h3>
+                    <p>Completed Treatments</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Charts Row -->
+        <div class="admin-analytics-grid">
+            <!-- Department Distribution Chart -->
+            <div class="admin-chart-card">
+                <h3>
+                    <span>🏢 Appointments by Department</span>
+                    <span style="font-size: 12px; color: var(--gray-600); font-weight: normal;">Live Allocation</span>
+                </h3>
+                <div class="chart-bar-group" id="deptChartContainer">
+                    <p style="color: var(--gray-600); text-align: center; padding: 20px;">Loading department distribution...</p>
+                </div>
+            </div>
+
+            <!-- Status Distribution Chart -->
+            <div class="admin-chart-card">
+                <h3>
+                    <span>📊 Appointment Status Breakdown</span>
+                    <span style="font-size: 12px; color: var(--gray-600); font-weight: normal;">Overall Portfolio</span>
+                </h3>
+                <div class="chart-bar-group" id="statusChartContainer">
+                    <p style="color: var(--gray-600); text-align: center; padding: 20px;">Loading status distribution...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Feeds -->
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px;">
+            <!-- Recent Appointments Card -->
+            <div class="admin-chart-card">
+                <h3>
+                    <span>⏱️ Recent Bookings</span>
+                    <button class="btn-table-action btn-table-view" onclick="switchAdminTab('tabAppointments')">View All →</button>
+                </h3>
+                <div class="table-responsive">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Date & Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentAppointmentsTable">
+                            <tr><td colspan="5" style="text-align:center;">Loading recent bookings...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Patients Card -->
+            <div class="admin-chart-card">
+                <h3>
+                    <span>👤 Newly Registered Patients</span>
+                    <button class="btn-table-action btn-table-view" onclick="switchAdminTab('tabPatients')">View All →</button>
+                </h3>
+                <div class="table-responsive">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentPatientsTable">
+                            <tr><td colspan="3" style="text-align:center;">Loading recent patients...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= TAB 2: APPOINTMENTS MANAGER ================= -->
+    <div class="admin-tab-pane" id="tabAppointments">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <div class="admin-card-title">
+                    <h2>📅 Appointments Management</h2>
+                    <p>Search, filter, update appointment status, reschedule or delete visits.</p>
+                </div>
+                <div class="admin-controls-bar">
+                    <input type="text" id="aptSearchInput" class="admin-search-input" placeholder="Search patient, doctor, ID...">
+                    
+                    <select id="aptStatusFilter" class="admin-filter-select">
+                        <option value="All">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+
+                    <select id="aptDeptFilter" class="admin-filter-select">
+                        <option value="All">All Departments</option>
+                        <option value="General Medicine">General Medicine</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Gynecology">Gynecology</option>
+                    </select>
+
+                    <button class="btn-primary" id="btnOpenNewAptModal" style="padding: 10px 18px; font-size: 14px;">
+                        <span>+ New Appointment</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="admin-data-table">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Patient Name</th>
+                            <th>Contact</th>
+                            <th>Department</th>
+                            <th>Doctor</th>
+                            <th>Date / Time</th>
+                            <th>Status Transition</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminAppointmentsTbody">
+                        <tr><td colspan="8" style="text-align:center;">Loading appointments...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TAB 3: DOCTORS DIRECTORY ================= -->
+    <div class="admin-tab-pane" id="tabDoctors">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <div class="admin-card-title">
+                    <h2>👨‍⚕️ Specialist Doctors Directory</h2>
+                    <p>Manage clinical medical staff, qualifications, specialties, and experience.</p>
+                </div>
+                <div class="admin-controls-bar">
+                    <input type="text" id="docSearchInput" class="admin-search-input" placeholder="Search doctor or specialty...">
+                    <button class="btn-primary" id="btnOpenAddDoctorModal" style="padding: 10px 18px; font-size: 14px;">
+                        <span>+ Add Doctor</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="admin-data-table">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Doctor Name</th>
+                            <th>Department</th>
+                            <th>Specialization</th>
+                            <th>Experience</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminDoctorsTbody">
+                        <tr><td colspan="6" style="text-align:center;">Loading doctors directory...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TAB 4: PATIENTS REGISTRY ================= -->
+    <div class="admin-tab-pane" id="tabPatients">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <div class="admin-card-title">
+                    <h2>👥 Registered Patients Database</h2>
+                    <p>Search patient medical profiles, demographics, contact info, and booking volume.</p>
+                </div>
+                <div class="admin-controls-bar">
+                    <input type="text" id="patientSearchInput" class="admin-search-input" placeholder="Search patient name, email, phone...">
+                    <button class="btn-primary" id="btnOpenAddPatientModal" style="padding: 10px 18px; font-size: 14px;">
+                        <span>+ Register Patient</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="admin-data-table">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Full Name</th>
+                            <th>Email Address</th>
+                            <th>Mobile</th>
+                            <th>Age / Gender</th>
+                            <th>Appointments</th>
+                            <th>Registered</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminPatientsTbody">
+                        <tr><td colspan="8" style="text-align:center;">Loading patients registry...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================= MODALS ================= -->
+
+<!-- 1. Doctor Modal (Add / Edit) -->
+<div class="modal-backdrop" id="doctorModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="doctorModalTitle">Add Specialist Doctor</h3>
+            <button class="modal-close-btn" onclick="closeModal('doctorModal')">&times;</button>
+        </div>
+        <form id="doctorForm">
+            <input type="hidden" id="docFormId">
+            <div class="modal-body">
+                <label for="docFormName" style="font-weight:700; display:block; margin-bottom:6px;">Doctor Full Name</label>
+                <input type="text" id="docFormName" placeholder="e.g. Dr. Raj Sharma" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm); margin-bottom:14px;">
+
+                <label for="docFormDept" style="font-weight:700; display:block; margin-bottom:6px;">Department</label>
+                <select id="docFormDept" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm); margin-bottom:14px;">
+                    <option value="">Select Department</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Gynecology">Gynecology</option>
+                    <option value="General Medicine">General Medicine</option>
+                </select>
+
+                <label for="docFormSpec" style="font-weight:700; display:block; margin-bottom:6px;">Specialization & Focus</label>
+                <input type="text" id="docFormSpec" placeholder="e.g. Heart Diseases, ECG, Angioplasty" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm); margin-bottom:14px;">
+
+                <label for="docFormExp" style="font-weight:700; display:block; margin-bottom:6px;">Clinical Experience</label>
+                <input type="text" id="docFormExp" placeholder="e.g. 15+ Years" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('doctorModal')">Cancel</button>
+                <button type="submit" class="btn-primary" id="btnSaveDoctor">Save Doctor</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Appointment Modal (Add / Edit) -->
+<div class="modal-backdrop" id="appointmentModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="aptModalTitle">Schedule / Edit Appointment</h3>
+            <button class="modal-close-btn" onclick="closeModal('appointmentModal')">&times;</button>
+        </div>
+        <form id="adminAptForm">
+            <input type="hidden" id="aptFormId">
+            <div class="modal-body">
+                <label for="aptFormPatient" style="font-weight:700; display:block; margin-bottom:6px;">Patient Name</label>
+                <input type="text" id="aptFormPatient" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm); margin-bottom:14px;">
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                    <div>
+                        <label for="aptFormEmail" style="font-weight:700; display:block; margin-bottom:6px;">Email</label>
+                        <input type="email" id="aptFormEmail" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                    <div>
+                        <label for="aptFormMobile" style="font-weight:700; display:block; margin-bottom:6px;">Mobile (10 digits)</label>
+                        <input type="tel" id="aptFormMobile" pattern="[0-9]{10}" maxlength="10" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                    <div>
+                        <label for="aptFormDept" style="font-weight:700; display:block; margin-bottom:6px;">Department</label>
+                        <select id="aptFormDept" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                            <option value="General Medicine">General Medicine</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Gynecology">Gynecology</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="aptFormDoctor" style="font-weight:700; display:block; margin-bottom:6px;">Assigned Doctor</label>
+                        <select id="aptFormDoctor" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                            <option value="">Select Doctor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                    <div>
+                        <label for="aptFormDate" style="font-weight:700; display:block; margin-bottom:6px;">Appointment Date</label>
+                        <input type="date" id="aptFormDate" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                    <div>
+                        <label for="aptFormTime" style="font-weight:700; display:block; margin-bottom:6px;">Appointment Time</label>
+                        <input type="time" id="aptFormTime" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                </div>
+
+                <div style="margin-bottom:14px;">
+                    <label for="aptFormStatus" style="font-weight:700; display:block; margin-bottom:6px;">Status</label>
+                    <select id="aptFormStatus" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="aptFormSymptoms" style="font-weight:700; display:block; margin-bottom:6px;">Symptoms / Clinical Notes</label>
+                    <textarea id="aptFormSymptoms" rows="2" style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('appointmentModal')">Cancel</button>
+                <button type="submit" class="btn-primary" id="btnSaveAppointment">Save Appointment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 3. Patient Modal (Add / Edit) -->
+<div class="modal-backdrop" id="patientModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="patientModalTitle">Register / Edit Patient</h3>
+            <button class="modal-close-btn" onclick="closeModal('patientModal')">&times;</button>
+        </div>
+        <form id="adminPatientForm">
+            <input type="hidden" id="patientFormId">
+            <div class="modal-body">
+                <label for="patientFormName" style="font-weight:700; display:block; margin-bottom:6px;">Patient Full Name</label>
+                <input type="text" id="patientFormName" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm); margin-bottom:14px;">
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                    <div>
+                        <label for="patientFormEmail" style="font-weight:700; display:block; margin-bottom:6px;">Email Address</label>
+                        <input type="email" id="patientFormEmail" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                    <div>
+                        <label for="patientFormMobile" style="font-weight:700; display:block; margin-bottom:6px;">Mobile Number</label>
+                        <input type="tel" id="patientFormMobile" pattern="[0-9]{10}" maxlength="10" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div>
+                        <label for="patientFormAge" style="font-weight:700; display:block; margin-bottom:6px;">Age</label>
+                        <input type="number" id="patientFormAge" min="1" max="120" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                    </div>
+                    <div>
+                        <label for="patientFormGender" style="font-weight:700; display:block; margin-bottom:6px;">Gender</label>
+                        <select id="patientFormGender" required style="width:100%; padding:10px 14px; border:1px solid var(--gray-300); border-radius:var(--radius-sm);">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('patientModal')">Cancel</button>
+                <button type="submit" class="btn-primary" id="btnSavePatient">Save Patient</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="admin-toast-container" id="toastContainer"></div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-bottom">
+        <p>© 2026 City Hospital - Administrative Operations Console. Authorized Access Only.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
